@@ -89,7 +89,7 @@ python3 app.py
 cd frontend
 npm install
 
-# Create .env file (optional, defaults to localhost:3001)
+# Create frontend/.env file (optional, defaults to localhost:3001)
 echo "VITE_API_URL=http://localhost:3001/api" > .env
 
 # Start dev server
@@ -98,7 +98,9 @@ npm run dev
 
 ## Environment Variables
 
-### Backend (.env)
+### Backend (backend/.env)
+
+Create a `.env` file in the `backend/` directory:
 
 ```env
 PORT=3001
@@ -116,7 +118,9 @@ JWT_EXPIRES_IN=7d
 AI_SERVICE_URL=http://localhost:5000
 ```
 
-### AI Service (.env)
+### AI Service (ai-service/.env)
+
+Create a `.env` file in the `ai-service/` directory (optional):
 
 ```env
 PORT=5000
@@ -124,11 +128,15 @@ PORT=5000
 
 **Note:** The AI service uses mock responses stored in `ai-service/data/mock_responses.py` and does not require any API keys. It provides 20 different general responses and 6 context-specific responses based on message keywords.
 
-### Frontend (.env)
+### Frontend (frontend/.env)
+
+Create a `.env` file in the `frontend/` directory:
 
 ```env
 VITE_API_URL=http://localhost:3001/api
 ```
+
+**Note:** This file should be located at `frontend/.env`. Vite automatically loads environment variables prefixed with `VITE_` from this file.
 
 ## API Endpoints
 
