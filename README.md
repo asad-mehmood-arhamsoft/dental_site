@@ -25,9 +25,8 @@ A full-stack application for managing dental clinic patients with an AI-powered 
 git clone https://github.com/asad-mehmood-arhamsoft/dental_site.git
 cd dental_site
 
-# Copy environment files
-cp backend/.env.example backend/.env
-# Edit backend/.env with your database credentials
+# Create backend/.env file with your database credentials
+# See Environment Variables section below for required variables
 
 # Start all services
 docker-compose up -d
@@ -59,8 +58,9 @@ CREATE DATABASE dental_clinic;
 ```bash
 cd backend
 npm install
-cp .env.example .env
-# Edit .env with your database credentials
+
+# Create .env file with your database credentials
+# See Environment Variables section below for required variables
 
 # Run migrations
 npm run migrate
@@ -73,13 +73,15 @@ npm run dev
 
 ```bash
 cd ai-service
-python -m venv venv
-source venv/bin/activate
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 
 # Start service
-python app.py
+python3 app.py
 ```
+
+**Note:** If `python` command is not found, use `python3` instead. You can also install `python-is-python3` package on Linux.
 
 #### 4. Frontend Setup
 
@@ -120,7 +122,7 @@ AI_SERVICE_URL=http://localhost:5000
 PORT=5000
 ```
 
-**Note:** The AI service uses mock responses and does not require any API keys.
+**Note:** The AI service uses mock responses stored in `ai-service/data/mock_responses.py` and does not require any API keys. It provides 20 different general responses and 6 context-specific responses based on message keywords.
 
 ### Frontend (.env)
 
@@ -236,7 +238,8 @@ dental_site/
 │   ├── scripts/
 │   │   └── migrate.js
 │   ├── server.js
-│   └── package.json
+│   ├── package.json
+│   └── Dockerfile
 ├── frontend/
 │   ├── src/
 │   │   ├── components/
@@ -248,14 +251,26 @@ dental_site/
 │   │   ├── utils/
 │   │   │   ├── auth.js
 │   │   │   └── api.js
+│   │   ├── validation/
+│   │   │   └── schemas/
+│   │   │       ├── authSchemas.js
+│   │   │       ├── patientSchemas.js
+│   │   │       └── index.js
 │   │   ├── App.jsx
-│   │   └── main.jsx
+│   │   ├── main.jsx
+│   │   └── index.css
 │   ├── package.json
-│   └── vite.config.js
+│   ├── vite.config.js
+│   ├── index.html
+│   └── Dockerfile
 ├── ai-service/
+│   ├── data/
+│   │   ├── __init__.py
+│   │   └── mock_responses.py
 │   ├── app.py
 │   ├── requirements.txt
-│   └── Dockerfile
+│   ├── Dockerfile
+│   └── venv/ (local development only)
 ├── docker-compose.yml
 └── README.md
 ```
@@ -269,9 +284,11 @@ This project uses AI assistance for code generation and development. The followi
 - **Frontend React components**: Component structure and state management
 - **Database schema design**: PostgreSQL table definitions and indexes
 - **Docker configuration**: Dockerfile and docker-compose setup
-- **Documentation**: README and design document structure
+- **Documentation**: README structure
 
-All code has been reviewed, tested, and customized for this specific use case. The AI service uses mock responses with 20 different contextual responses based on user queries.
+All code has been reviewed, tested, and customized for this specific use case. The AI service uses mock responses stored in `ai-service/data/mock_responses.py` with:
+- **20 general responses**: Randomly selected for general questions
+- **6 context-specific responses**: Based on message keywords (schedule, pain, cleaning, cost, greeting, non-dental)
 
 ## 🔒 Security Considerations
 
@@ -279,14 +296,15 @@ All code has been reviewed, tested, and customized for this specific use case. T
 - JWT tokens for authentication
 - SQL injection protection via parameterized queries
 - CORS enabled for frontend-backend communication
-- Input validation using express-validator
+- Input validation using express-validator (backend) and Yup (frontend)
+- Validation schemas organized in `frontend/src/validation/schemas/`
 - Environment variables for sensitive data
 
 ## 📚 Technologies Used
 
-- **Frontend**: React 18, React Router, Axios, Vite
-- **Backend**: Node.js, Express.js, PostgreSQL, JWT, bcrypt
-- **AI Service**: Python, Flask (Mock Responses)
+- **Frontend**: React 18, React Router, Axios, Vite, Yup (validation)
+- **Backend**: Node.js, Express.js, PostgreSQL, JWT, bcrypt, express-validator
+- **AI Service**: Python 3.11+, Flask (Mock Responses)
 - **DevOps**: Docker, Docker Compose
 - **Database**: PostgreSQL 15
 
