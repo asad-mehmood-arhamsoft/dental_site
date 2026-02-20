@@ -17,13 +17,11 @@ exports.register = async (req, res) => {
 
     const { email, password } = req.body;
 
-    // Check if user already exists
     const existingUser = await User.findByEmail(email);
     if (existingUser) {
       return res.status(400).json({ error: 'User already exists' });
     }
 
-    // Create user
     const user = await User.create({ email, password });
     const token = generateToken(user.id);
 
@@ -33,7 +31,6 @@ exports.register = async (req, res) => {
       user: { id: user.id, email: user.email }
     });
   } catch (error) {
-    console.error('Register error:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 };
@@ -47,13 +44,11 @@ exports.login = async (req, res) => {
 
     const { email, password } = req.body;
 
-    // Find user
     const user = await User.findByEmail(email);
     if (!user) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
-    // Verify password
     const isValid = await User.verifyPassword(password, user.password_hash);
     if (!isValid) {
       return res.status(401).json({ error: 'Invalid credentials' });
@@ -67,7 +62,6 @@ exports.login = async (req, res) => {
       user: { id: user.id, email: user.email }
     });
   } catch (error) {
-    console.error('Login error:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 };

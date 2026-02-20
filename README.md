@@ -74,14 +74,8 @@ npm run dev
 ```bash
 cd ai-service
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate
 pip install -r requirements.txt
-
-# Optional: Set environment variables for AI
-export OPENAI_API_KEY=your_key_here
-# OR
-export OPENROUTER_API_KEY=your_key_here
-export USE_OPENROUTER=true
 
 # Start service
 python app.py
@@ -124,12 +118,9 @@ AI_SERVICE_URL=http://localhost:5000
 
 ```env
 PORT=5000
-OPENAI_API_KEY=your_openai_api_key_here
-# OR use OpenRouter
-OPENROUTER_API_KEY=your_openrouter_api_key_here
-USE_OPENROUTER=true
-MODEL_NAME=gpt-3.5-turbo
 ```
+
+**Note:** The AI service uses mock responses and does not require any API keys.
 
 ### Frontend (.env)
 
@@ -280,7 +271,7 @@ This project uses AI assistance for code generation and development. The followi
 - **Docker configuration**: Dockerfile and docker-compose setup
 - **Documentation**: README and design document structure
 
-All code has been reviewed, tested, and customized for this specific use case. The AI service itself (Python Flask app) can use OpenAI or OpenRouter APIs, or fall back to mock responses if no API keys are configured.
+All code has been reviewed, tested, and customized for this specific use case. The AI service uses mock responses with 20 different contextual responses based on user queries.
 
 ## 🔒 Security Considerations
 
@@ -295,7 +286,7 @@ All code has been reviewed, tested, and customized for this specific use case. T
 
 - **Frontend**: React 18, React Router, Axios, Vite
 - **Backend**: Node.js, Express.js, PostgreSQL, JWT, bcrypt
-- **AI Service**: Python, Flask, OpenAI API / OpenRouter
+- **AI Service**: Python, Flask (Mock Responses)
 - **DevOps**: Docker, Docker Compose
 - **Database**: PostgreSQL 15
 
