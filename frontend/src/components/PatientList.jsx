@@ -40,13 +40,13 @@ const PatientList = ({ patients, loading, pagination, onEdit, onDelete, onChat, 
                 <td>{patient.email || 'N/A'}</td>
                 <td>{patient.phone || 'N/A'}</td>
                 <td>{formatDate(patient.date_of_birth)}</td>
-                <td 
-                  style={{ 
+                <td
+                  style={{
                     maxWidth: '300px',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                     whiteSpace: 'nowrap'
-                  }} 
+                  }}
                   title={patient.medical_notes || 'N/A'}
                 >
                   {patient.medical_notes || 'N/A'}

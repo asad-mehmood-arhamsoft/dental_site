@@ -20,7 +20,6 @@ exports.create = async (req, res) => {
 
     res.status(201).json({ message: 'Patient created successfully', patient });
   } catch (error) {
-    console.error('Create patient error:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 };
@@ -33,7 +32,6 @@ exports.getAll = async (req, res) => {
     const result = await Patient.findAll(req.user.id, { page, limit });
     res.json(result);
   } catch (error) {
-    console.error('Get patients error:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 };
@@ -49,7 +47,6 @@ exports.getById = async (req, res) => {
 
     res.json(patient);
   } catch (error) {
-    console.error('Get patient error:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 };
@@ -78,7 +75,6 @@ exports.update = async (req, res) => {
 
     res.json({ message: 'Patient updated successfully', patient });
   } catch (error) {
-    console.error('Update patient error:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 };
@@ -94,7 +90,6 @@ exports.delete = async (req, res) => {
 
     res.json({ message: 'Patient deleted successfully' });
   } catch (error) {
-    console.error('Delete patient error:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 };

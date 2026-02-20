@@ -40,7 +40,6 @@ const PatientChat = ({ onLogout }) => {
       const response = await api.get(`/chat/${patientId}`)
       setMessages(response.data.messages || [])
     } catch (err) {
-      console.error('Failed to fetch chat history:', err)
     } finally {
       setLoading(false)
     }

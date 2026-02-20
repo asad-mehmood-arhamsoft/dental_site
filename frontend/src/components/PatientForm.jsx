@@ -1,33 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import * as yup from 'yup'
 import api from '../utils/api'
-
-// Yup validation schema
-const patientSchema = yup.object().shape({
-  name: yup
-    .string()
-    .required('Name is required')
-    .min(2, 'Name must be at least 2 characters')
-    .max(100, 'Name must be less than 100 characters'),
-  email: yup
-    .string()
-    .required('Email is required')
-    .email('Please enter a valid email address'),
-  phone: yup
-    .string()
-    .required('Phone number is required')
-    .matches(/^[0-9+\-\s()]+$/, 'Please enter a valid phone number')
-    .min(10, 'Phone number must be at least 10 digits'),
-  dob: yup
-    .string()
-    .required('Date of birth is required')
-    .matches(/^\d{4}-\d{2}-\d{2}$/, 'Please enter a valid date (YYYY-MM-DD)'),
-  medicalNotes: yup
-    .string()
-    .required('Medical notes are required')
-    .min(5, 'Medical notes must be at least 5 characters')
-    .max(1000, 'Medical notes must be less than 1000 characters')
-})
+import { patientSchema } from '../validation/schemas/patientSchemas'
 
 const PatientForm = ({ patient, onClose, onSuccess }) => {
   const [formData, setFormData] = useState({
@@ -43,7 +16,6 @@ const PatientForm = ({ patient, onClose, onSuccess }) => {
 
   useEffect(() => {
     if (patient) {
-      // Format date for date input (YYYY-MM-DD)
       let formattedDob = ''
       if (patient.date_of_birth) {
         const date = new Date(patient.date_of_birth)
@@ -68,7 +40,7 @@ const PatientForm = ({ patient, onClose, onSuccess }) => {
       ...formData,
       [name]: value
     })
-    // Clear field error when user starts typing
+
     if (errors[name]) {
       setErrors({
         ...errors,
@@ -105,7 +77,7 @@ const PatientForm = ({ patient, onClose, onSuccess }) => {
     setLoading(true)
 
     try {
-      // Validate entire form
+
       await patientSchema.validate(formData, { abortEarly: false })
       
       if (patient) {
@@ -116,17 +88,14 @@ const PatientForm = ({ patient, onClose, onSuccess }) => {
       onSuccess()
     } catch (err) {
       if (err.inner) {
-        // Yup validation errors
         const yupErrors = {}
         err.inner.forEach((error) => {
           yupErrors[error.path] = error.message
         })
         setErrors(yupErrors)
       } else {
-        // API errors
         const apiError = err.response?.data
         if (apiError?.errors) {
-          // Backend validation errors
           const backendErrors = {}
           apiError.errors.forEach((error) => {
             backendErrors[error.path] = error.msg
