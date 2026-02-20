@@ -275,20 +275,6 @@ dental_site/
 └── README.md
 ```
 
-## 🤖 AI Usage Disclosure
-
-This project uses AI assistance for code generation and development. The following components were AI-assisted:
-
-- **Initial project structure setup**: Project scaffolding and folder organization
-- **Backend API implementation**: Express.js routes, controllers, and models
-- **Frontend React components**: Component structure and state management
-- **Database schema design**: PostgreSQL table definitions and indexes
-- **Docker configuration**: Dockerfile and docker-compose setup
-- **Documentation**: README structure
-
-All code has been reviewed, tested, and customized for this specific use case. The AI service uses mock responses stored in `ai-service/data/mock_responses.py` with:
-- **20 general responses**: Randomly selected for general questions
-- **6 context-specific responses**: Based on message keywords (schedule, pain, cleaning, cost, greeting, non-dental)
 
 ## 🔒 Security Considerations
 
