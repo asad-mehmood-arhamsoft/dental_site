@@ -2,14 +2,14 @@
 
 A full-stack application for managing dental clinic patients with an AI-powered chat assistant.
 
-## 🏗️ Architecture
+## Architecture
 
 - **Frontend**: React (Vite) - Patient dashboard and chat UI
 - **Backend**: Node.js + Express.js - RESTful API with JWT authentication
 - **Database**: PostgreSQL - Patient data and chat history
 - **AI Service**: Python (Flask) - AI-powered chat responses
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -96,7 +96,7 @@ echo "VITE_API_URL=http://localhost:3001/api" > .env
 npm run dev
 ```
 
-## 📋 Environment Variables
+## Environment Variables
 
 ### Backend (.env)
 
@@ -130,7 +130,7 @@ PORT=5000
 VITE_API_URL=http://localhost:3001/api
 ```
 
-## 🌐 API Endpoints
+## API Endpoints
 
 ### Authentication
 - `POST /api/auth/register` - Register new user
@@ -149,7 +149,7 @@ VITE_API_URL=http://localhost:3001/api
 
 All patient and chat endpoints require JWT authentication (Bearer token).
 
-## 🚢 Deployment
+## Deployment
 
 ### Frontend Deployment (Vercel)
 
@@ -176,7 +176,7 @@ Use managed PostgreSQL services:
 - **Neon**: https://neon.tech
 - **Render PostgreSQL**: https://render.com
 
-## 📝 Live Deployment URLs
+## Live Deployment URLs
 
 **Note**: Update these URLs after deployment
 
@@ -185,7 +185,7 @@ Use managed PostgreSQL services:
 - AI Service: [To be deployed]
 - Database: [To be deployed]
 
-## 🧪 Testing
+## Testing
 
 ### Manual Testing
 
@@ -214,7 +214,7 @@ curl -X GET http://localhost:3001/api/patients \
   -H "Authorization: Bearer TOKEN"
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 dental_site/
@@ -276,7 +276,7 @@ dental_site/
 ```
 
 
-## 🔒 Security Considerations
+## Security Considerations
 
 - Passwords are hashed using bcrypt
 - JWT tokens for authentication
@@ -286,7 +286,7 @@ dental_site/
 - Validation schemas organized in `frontend/src/validation/schemas/`
 - Environment variables for sensitive data
 
-## 📚 Technologies Used
+## Technologies Used
 
 - **Frontend**: React 18, React Router, Axios, Vite, Yup (validation)
 - **Backend**: Node.js, Express.js, PostgreSQL, JWT, bcrypt, express-validator
@@ -294,10 +294,10 @@ dental_site/
 - **DevOps**: Docker, Docker Compose
 - **Database**: PostgreSQL 15
 
-## 📄 License
+## License
 
 ISC
 
-## 👤 Author
+## Author
 
 Senior Full-Stack Engineer Assessment Project
