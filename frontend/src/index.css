@@ -933,30 +933,6 @@ code {
   color: #666;
 }
 
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.pagination button {
-  padding: 8px 16px;
-  border: 1px solid #ddd;
-  background: white;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.pagination button:hover:not(:disabled) {
-  background-color: #f0fdfa;
-}
-
-.pagination button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
 
 /* Chat Page Styles */
 .chat-page {
@@ -1960,58 +1936,93 @@ code {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  margin-top: 32px;
-  padding-top: 24px;
-  border-top: 1px solid #e2e8f0;
+  gap: 20px;
+  margin-top: 40px;
+  padding: 24px;
+  background: linear-gradient(135deg, #f0fdfa 0%, #ffffff 100%);
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .pagination-btn {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 10px 16px;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
   background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
   color: #4a5568;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  min-width: 120px;
+}
+
+.pagination-btn svg {
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
 }
 
 .pagination-btn:hover:not(:disabled) {
-  background: #f0fdfa;
-  border-color: #cbd5e0;
-  color: #2d3748;
+  background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+  border-color: #14b8a6;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
+}
+
+.pagination-btn:hover:not(:disabled) svg {
+  transform: translateX(-2px);
+}
+
+.pagination-btn:last-child:hover:not(:disabled) svg {
+  transform: translateX(2px);
+}
+
+.pagination-btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(20, 184, 166, 0.25);
 }
 
 .pagination-btn:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
+  background: #f7fafc;
+  border-color: #e2e8f0;
+  color: #a0aec0;
+  box-shadow: none;
 }
 
 .pagination-info {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
+  gap: 4px;
 }
 
 .pagination-text {
-  font-size: 14px;
+  font-size: 15px;
   color: #4a5568;
+  font-weight: 500;
 }
 
 .pagination-text strong {
-  color: #1a202c;
-  font-weight: 600;
+  color: #14b8a6;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 0 4px;
 }
 
 .pagination-total {
   font-size: 12px;
   color: #a0aec0;
+  font-weight: 500;
+  margin-top: 2px;
 }
 
 /* Responsive Design */
@@ -2092,7 +2103,18 @@ code {
 
   .patient-pagination {
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
+    padding: 20px 16px;
+  }
+
+  .pagination-btn {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .pagination-info {
+    width: 100%;
+    min-width: auto;
   }
 
   .patient-form-modal {

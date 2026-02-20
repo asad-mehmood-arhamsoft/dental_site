@@ -1,7 +1,27 @@
 const pool = require('../config/database');
 
 class Patient {
+  static async findByEmail(email, userId, excludeId = null) {
+    let query = 'SELECT * FROM patients WHERE email = $1 AND user_id = $2';
+    const params = [email, userId];
+    
+    if (excludeId) {
+      query += ' AND id != $3';
+      params.push(excludeId);
+    }
+    
+    const result = await pool.query(query, params);
+    return result.rows[0];
+  }
+
   static async create({ name, email, phone, dob, medicalNotes, userId }) {
+    const existingPatient = await this.findByEmail(email, userId);
+    if (existingPatient) {
+      const error = new Error('Email already exists for another patient');
+      error.statusCode = 400;
+      throw error;
+    }
+
     const result = await pool.query(
       `INSERT INTO patients (name, email, phone, date_of_birth, medical_notes, user_id, created_at, updated_at)
        VALUES ($1, $2, $3, $4, $5, $6, NOW(), NOW())
@@ -48,6 +68,14 @@ class Patient {
   }
 
   static async update(id, userId, { name, email, phone, dob, medicalNotes }) {
+    // Check if email already exists for another patient (same user)
+    const existingPatient = await this.findByEmail(email, userId, id);
+    if (existingPatient) {
+      const error = new Error('Email already exists for another patient');
+      error.statusCode = 400;
+      throw error;
+    }
+
     const result = await pool.query(
       `UPDATE patients 
        SET name = $1, email = $2, phone = $3, date_of_birth = $4, 

@@ -101,7 +101,12 @@ const PatientForm = ({ patient, onClose, onSuccess }) => {
           })
           setErrors(backendErrors)
         } else {
-          setError(apiError?.error || 'An error occurred')
+          const errorMessage = apiError?.error || 'An error occurred'
+          if (errorMessage.toLowerCase().includes('email') && errorMessage.toLowerCase().includes('already exists')) {
+            setErrors({ email: errorMessage })
+          } else {
+            setError(errorMessage)
+          }
         }
       }
     } finally {

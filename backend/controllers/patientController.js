@@ -20,6 +20,9 @@ exports.create = async (req, res) => {
 
     res.status(201).json({ message: 'Patient created successfully', patient });
   } catch (error) {
+    if (error.statusCode === 400) {
+      return res.status(400).json({ error: error.message });
+    }
     res.status(500).json({ error: 'Internal server error' });
   }
 };
@@ -75,6 +78,10 @@ exports.update = async (req, res) => {
 
     res.json({ message: 'Patient updated successfully', patient });
   } catch (error) {
+    if (error.statusCode === 400) {
+      return res.status(400).json({ error: error.message });
+    }
+    console.error('Update patient error:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 };

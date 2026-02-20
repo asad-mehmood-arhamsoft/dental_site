@@ -294,6 +294,10 @@ dental_site/
 - **DevOps**: Docker, Docker Compose
 - **Database**: PostgreSQL 15
 
+## AI Usage Disclosure
+
+I used Cursor AI for debugging issues and faster UI development. All code logic and other decisions belonged to me.
+
 ## License
 
 ISC
