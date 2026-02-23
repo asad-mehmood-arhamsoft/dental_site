@@ -102,6 +102,23 @@ npm run dev
 
 Create a `.env` file in the `backend/` directory:
 
+**Option 1: Using Connection String (Recommended for Supabase/Cloud Databases)**
+
+```env
+PORT=3001
+NODE_ENV=production
+
+# Supabase or other cloud database connection string
+DATABASE_URL=postgresql://postgres:password@host:5432/database
+
+JWT_SECRET=your-super-secret-jwt-key-change-in-production
+JWT_EXPIRES_IN=7d
+
+AI_SERVICE_URL=http://localhost:5000
+```
+
+**Option 2: Using Individual Variables (For Local Development)**
+
 ```env
 PORT=3001
 NODE_ENV=development
@@ -117,6 +134,8 @@ JWT_EXPIRES_IN=7d
 
 AI_SERVICE_URL=http://localhost:5000
 ```
+
+**Note:** The `database.js` file automatically detects and uses `DATABASE_URL` if present, otherwise it falls back to individual variables. For Supabase, use the full connection string format: `postgresql://user:password@host:port/database`
 
 ### AI Service (ai-service/.env)
 
@@ -169,9 +188,14 @@ All patient and chat endpoints require JWT authentication (Bearer token).
 ### Backend Deployment (Render/Railway/Fly.io)
 
 1. Set up PostgreSQL database (Supabase, Neon, or Render PostgreSQL)
-2. Set environment variables in your hosting platform
-3. Deploy from GitHub repository
-4. Run migrations: `npm run migrate`
+2. Get your database connection string (e.g., from Supabase: `postgresql://user:password@host:port/database`)
+3. Set environment variables in your hosting platform:
+   - `DATABASE_URL` - Your full database connection string
+   - `JWT_SECRET` - A secure random string
+   - `AI_SERVICE_URL` - Your AI service URL
+   - `NODE_ENV=production`
+4. Deploy from GitHub repository
+5. Run migrations: `npm run migrate`
 
 ### AI Service Deployment
 
